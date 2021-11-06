@@ -1,4 +1,4 @@
-\documentclass[runningheads]{llncs}
+\documentclass[]{llncs}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{parskip}
@@ -20,16 +20,18 @@
 \maketitle
 % Abstract
 \begin{abstract}
-This paper conducts a theoretical and experimental research in order to solve the N-queens problem with two algorithms, the A* and a genetic algorithm. The first part of the document consists in a formal definition of the problem and of both algorithms, as well as how they are adapted in order to solve this particular problem. Data is then extracted from several executions of both algorithms and an analysis of the results is carried out. The paper ends with a comparison of both approaches and a small conclusion summing up everything that it covered. 
+This paper conducts a theoretical and experimental research in order to solve the N-queens problem with two algorithms, the A* algorithm and a genetic algorithm. The first part of the document consists in a formal definition of the problem and of both algorithms, as well as how they are adapted in order to solve this particular N-queens problem. Data is then extracted from several executions of both algorithms and an analysis of the results is carried out. The paper ends with a comparison of both approaches and a small conclusion summing up everything that it covered. 
 % Keywords
 \keywords{A* \and Genetic algorithms \and N-queens problem 
-    \and Heuristic Search.}
+    \and Heuristic Search \and Metaheuristics.}
 \end{abstract}
 % Introduction
 \section{Introduction}\label{introduction}
-This paper will consist on solving the popular problem known as \textit{N-queens} by means of two different algorithms. These algorithms are the A* and a genetic algorithm. The motivation for solving the N-Queens is to see how these algorithms behave against a problem with so many combinations that requires a big computational calculation.
+This paper solves the popular problem known as \textit{N-queens} by means of two different algorithms. These algorithms are the A* algorithm and a genetic algorithm. 
 
-In the first part of the document a theoretical definition of the problem and of the algorithms will be carried out. After that, there is a description of the steps taken into adapting these algorithms for being able to solve the problem. Finally, an experimental study will take place in order to measure the overall performance and effectiveness of the two approaches as well as a comparison between the results.
+The motivation for solving the N-Queens is to see how these algorithms behave against a problem with so many combinations that it requires a big computational calculation. The data obtained in this process is then used as basis for comparing both algorithms.
+
+In the first part of the document a theoretical definition of the problem and of the algorithms will be carried out. After that, a description of the steps taken into adapting these algorithms for being able to solve the problem is given. Then, an experimental study will take place in order to measure the overall performance and effectiveness of the two approaches as well as a comparison between the results. Finally, the conclusions of the paper are presented.
 % N queens problem
 \section{N-queens Problem}\label{nqueens_problem}
 Introduced in 1848 by chess composer Max Bezzel as the \textit{eight queens puzzle}, it was later solved and extended by Franz Nauck to the \textit{n queens problem}. It is a very well known constraint satisfaction problem, and consists in setting N chess queens in a gameboard of $N \times N$ dimensions such as no pair of queens are attacking themselves \cite{inteligencia_artificial}. In chess, queens can attack other pieces if they are in the same row, column or diagonal as them.
