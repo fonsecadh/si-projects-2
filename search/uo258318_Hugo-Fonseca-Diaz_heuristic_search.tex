@@ -1,0 +1,321 @@
+\documentclass[runningheads]{llncs}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{fancyhdr}
+\usepackage{csquotes}
+\usepackage{lastpage}
+\usepackage{array}
+
+% Document
+\begin{document}
+% Title
+\title{Heuristic Search Practices. Course 2020-2021. N-queens with A* and Genetic Algorithms.}
+\author{Hugo Fonseca Díaz\\ \email{uo258318@uniovi.es}}
+\institute{School of Computing Engineering. University of Oviedo.}
+\maketitle
+% Abstract
+\begin{abstract}
+This paper conducts a theoretical and experimental research in order to solve the N-queens problem with two algorithms, the A* and a genetic algorithm. The first part of the document consists in a formal definition of the problem and of both algorithms, as well as how they are adapted in order to solve this particular problem. Data is then extracted from several executions of both algorithms and an analysis of the results is carried out. The paper ends with a comparison of both approaches and a small conclusion summing up everything that it covered. 
+% Keywords
+\keywords{A* \and Genetic algorithms \and N-queens problem 
+    \and Heuristic Search.}
+\end{abstract}
+% Introduction
+\section{Introduction}\label{introduction}
+This paper will consist on solving the popular problem known as \textit{N-queens} by means of two different algorithms. These algorithms are the A* and a genetic algorithm. The motivation for solving the N-Queens is to see how these algorithms behave against a problem with so many combinations that requires a big computational calculation.
+
+In the first part of the document a theoretical definition of the problem and of the algorithms will be carried out. After that, there is a description of the steps taken into adapting these algorithms for being able to solve the problem. Finally, an experimental study will take place in order to measure the overall performance and effectiveness of the two approaches as well as a comparison between the results.
+% N queens problem
+\section{N-queens Problem}\label{nqueens_problem}
+Introduced in 1848 by chess composer Max Bezzel as the \textit{eight queens puzzle}, it was later solved and extended by Franz Nauck to the \textit{n queens problem}. It is a very well known constraint satisfaction problem, and consists in setting N chess queens in a gameboard of $N \times N$ dimensions such as no pair of queens are attacking themselves \cite{inteligencia_artificial}. In chess, queens can attack other pieces if they are in the same row, column or diagonal as them.
+
+Some traditional forms of solving the problem include:
+\begin{itemize}
+    \item \textit{Recursive} algorithms: in each iteration they place a single queen in the board and change the problem from an $n$ queens problem to a $n - 1$ queens problem.
+    \item A \textit{brute-force} search algorithm: it considers all combinations of placing the queens in the board and then filters out the ones that put more than one queen in the same location or that put a pair of queens attacking themselves.
+    \item A \textit{backtracking} search algorithm with depth-first search: creates the search tree by taking into account one row of the board at a time, which eliminates most non-solutions very early in the execution.
+    \item \textit{Greedy} algorithms: even though they do not always find the optimal solution they can solve problems with greater size than the ones backtracking is able to solve.
+\end{itemize}
+% A* algorithm
+\section{A* algorithm}\label{astar_alg}
+The A* algorithm \cite{inteligencia_artificial,artificial_intelligence} is an informed search algorithm. Its also an specialization of the BF (Best First) algorithm with a different evaluation function. Before expressing this evaluation function, some concepts must be introduced:
+\[f^{*}(n) = g^{*}(n) + h^{*}(n)\]
+\begin{itemize}
+    \item $g^{*}(n)$ is the lowest path cost between the initial node and $n$.
+    \item $h^{*}(n)$ is the lowest path cost between $n$ to the nearest target node.
+    \item $f^{*}(n)$ is the lowest path cost between the initial node to the target node passing through node $n$. 
+    \item $C^{*} = f^{*}(initial) = h^{*}(initial)$ is the cost of the optimal solution. 
+\end{itemize}
+
+Once those concepts have been introduced, the A* evaluation function can be defined by:
+\[f(n) = g(n) + h(n)\]
+\begin{itemize}
+    \item $g(n)$ is the best lowest path cost between the initial node and $n$ obtained during the search until that moment.
+    \item $h(n)$ is a positive estimation of $h^{*}(n)$, such as $h(n) = 0$ if $n$ is a target node.
+    \item $f(n)$ is an estimation of $f^{*}(n)$
+\end{itemize}
+
+A* has the following formal properties:
+\begin{itemize}
+    \item \textbf{Admissibility:} a search algorithm is said to be admissible if it always finds the optimal solution. This means that the heuristic function $h$ must be a positive estimation of the value of $h^{*}(n)$ for all nodes, that is, $h(n) \leq h^{*}(n) \forall n$. 
+    \item \textbf{Dominance:} if $h_2$ is better informed than $h_1$, then every node expanded by $A^{*}(h_2)$ is expanded by $A^{*}(h_1)$. This means that $A^{*}(h_2)$ dominates $A^{*}(h_1)$. For an heuristic function $h_2$ to be better informed than another one $h_1$ the following must be true: $h_1(n) < h_2(n) \leq h^{*}(n)$ for every $n$ non final.
+    \item \textbf{Monotony:} an heuristic function $h1$ is monotonous if for every pair of nodes $n_1$ and $n_2$ it is true that $h(n_1) \leq h(n_2) + c(n_1, n_2)$ being $c$ the cost of going from $n_1$ to $n_2$.
+\end{itemize}
+% Genetic algorithms
+\section{Genetic algorithms}\label{gen_algs}
+Genetic algorithms \cite{ag_tutorial} are metaheuristic search and optimization algorithms and a class of evolutionary algorithms based on the model of natural biological evolution depicted by Charles Darwin in his book \textit{On the Origin of Species} \cite{darwin}. They perform the evolution of a population, selecting the fittest individuals to become the parents of the next generation. The next generation will be reproduced using crossover and mutation operators.
+
+A genetic algorithm has the following components:
+\begin{itemize}
+    \item A \textbf{codification scheme}. The genetic algorithm needs some kind of codification in order to represent potential solutions. It can be a chain of binary digits, permutations, vectors, etc. 
+    \item A \textbf{fitness function}. This function is used to evaluate each individual and assign to them a value used for their selection as potential parents for the next generation. The fitness value is the non-negative value representing the performance of a given individual.
+    \item A way of \textbf{generating the initial population}. This method of creating initial populations can be done by the use of an heuristic function or, in the simplest case, making a random population disregarding their level of quality.
+    \item A set of \textbf{genetic operators}. 
+    \begin{itemize}
+        \item \textbf{Selection:} operator that chooses a set of individuals from the current generation to be the parents for the next generation.
+        \item \textbf{Crossover:} operator that combines two or more parents to obtain offsprings that most likely will inherit characteristics from their parents.
+        \item \textbf{Mutation:} operator that makes minor random changes in the genetic structure of a chromosome in order to obtain a new range of genetic material.
+    \end{itemize}
+    \item Some \textbf{parameters}. Like the population size, number of generations, crossover probability, mutation probability, etc.
+\end{itemize}
+% Application of A* algorithm to the N-queens problem
+\section{Application of A* algorithm to the N-queens problem}\label{astar_nqueens}
+Two ways of modeling the search space have been defined for this problem:
+\begin{itemize}
+    \item \textbf{Incremental:} in this version, the initial state is the empty gameboard and in each iteration a new queen is placed in a position such as it is not attacking or being attacked by any other queen in the board. This keeps going until the N queens are placed or until there are no locations in the board where the queen can be placed without breaking the constraints.
+    \item \textbf{Complete:} in this version, the initial state is a board where the N queens are already placed. However, the queens can be in locations where they are attacking one another. In each iteration a queen is moved to a different position until a state where no pair of queens are attacking themselves is reached. There are two variants:
+    \begin{itemize}
+        \item \textbf{Queens in first row:} in this variant the n queens are placed in the first row of the board.
+        \item \textbf{Queens in every column:} in this variant the n queens are placed in random positions of the board, so different executions can lead to different results.
+    \end{itemize}
+\end{itemize}
+Three heuristic functions were implemented for solving the problem:
+\begin{itemize}
+    \item \textbf{Null heuristic:} heuristic function that always return zero. It is an admissible and a monotonous heuristic.  
+    \item \textbf{Number of attacking pairs:} heuristic function that estimates de number of necessary movements in order to achieve a solution by means of analysing the number of attacking pairs in a board where there are already N queens placed. It is an admissible and a monotonous heuristic.
+    \item \textbf{Probabilistic estimation of solution:} heuristic function that estimates the probability of finding a solution from any given state. It is an admissible heuristic. 
+\end{itemize}
+% Application of genetic algorithms to the N-queens problem
+\section{Applications of genetic algorithms to the N-queens problem}\label{gen_nqueens}
+The genetic algorithm implemented for solving the N-queens problem has the following characteristics:
+\begin{itemize}
+    \item \textbf{Codification scheme:} a chain of permutations that contains the rows in which the queens are located.
+    \item \textbf{Fitness function:} implements fitness scaling, that is, to further differenciate the good chromosomes from the bad ones. The way it is done is by substracting from the fitness value of all individuals the fitness value of the worst in that generation. 
+    \item \textbf{Generating the initial population:} a chromosome is a random permutation of the numbers ranged from one to the size of the board such as no number is repeated.
+    \item A set of \textbf{genetic operators}. 
+    \begin{itemize}
+        \item \textbf{Selection:} introduces elitism, that is, the best individual of that generation is carried over the next generation.
+        \item \textbf{Crossover:} implements the OX (Order crossover) operator. This method of crossover implies that the offspring will inherit the order and position of some of the genes of a parent and the relative order of the remaining genes of the other parent.
+        \item \textbf{Mutation:} swaps the content of two random positions of the permutation.
+    \end{itemize}
+    \item \textbf{Parameters:} $Population size = 50$, $mutation probability = 0.15$, $number of generations = 100$.
+\end{itemize}
+% Experimental Research
+\section{Experimental Research}\label{exp_research}
+The behaviours of the A* and genetic algorithm previously defined are going to be measured next. For this, a modified version of the \textit{aima-java} project available at \cite{aimajava} is used. As the name implies, these algorithms are implemented in the \textit{Java} programming language.
+
+For the enviroment used to test the algorithms the following information is listed:
+\begin{itemize}
+    \item \textbf{Operating system:} Manjaro Linux \textit{x86-64}
+    \item \textbf{Kernel:} 5.7.19-2-MANJARO
+    \item \textbf{Host:} 81DE Lenovo ideapad 330-15IKB
+    \item \textbf{CPU:} Intel i7-8550U (8) @ 4.000GHz
+    \item \textbf{RAM:} 8GB
+\end{itemize}
+
+This experimental research consists of a description of the dataset, a list of the results obtained for both algorithms and a comparison between their behaviours for solving the N-queens problem.
+% Dataset
+\subsection{Dataset}\label{dataset}
+The problems to be resolved are the following:
+\begin{itemize}
+    \item \textbf{A*:}
+    \begin{itemize}
+        \item \textbf{Complete version:}
+        \begin{itemize}
+            \item \textbf{In the first row:} executed one time for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The following heuristic functions will be tested:
+            \begin{itemize}
+                \item \textit{Null heuristic}
+                \item \textit{Number of attacking pairs}
+                \item \textit{Probabilistic estimation of solution}
+            \end{itemize}
+            \item \textbf{In every column:} executed ten times for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The average and best execution will be listed. The following heuristic functions will be tested:
+            \begin{itemize}
+                \item \textit{Null heuristic}
+                \item \textit{Number of attacking pairs}
+                \item \textit{Probabilistic estimation of solution}
+            \end{itemize}
+        \end{itemize}
+        \item \textbf{Incremental version:} executed one time for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The following heuristic functions will be tested:
+        \begin{itemize}
+            \item \textit{Null heuristic}
+            \item \textit{Number of attacking pairs}
+            \item \textit{Probabilistic estimation of solution}
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Genetic algorithm:} executed ten times for each $n$ in range 4, 6, 8, 16 and 32. The average and best execution will be listed.
+\end{itemize}
+% Results
+\subsection{A* Results}\label{astar_results}
+The results obtained in the executions of A* are the following:
+% Null heuristic
+\subsubsection{Null heuristic}
+For the \textit{null} heuristic the measurements obtained are listed below in the form of two tables. \textbf{Table 1} shows the expanded nodes for every version as well as the best, average and standard deviation for the completed version with queens in every column. Note that for $n = 8$ the average expanded nodes for the complete version with queens in every column is lower than for $n = 6$. This is because only two of ten executions were able to finish, and those were the ones with the lower expanded nodes. \textbf{Table 2} shows the same information but for the path cost of the solution.
+
+\begin{table}[]
+\caption{Expanded nodes for the \textit{null} heuristic function}
+\centering
+\begin{tabular}{llllll}
+Expanded &             &                      &                       &                          &                                 \\ \hline
+N        & Incremental & CompleteFirstRow     & ComplEveryCol Best    & ComplEveryCol Average    & ComplEveryCol Std. Deviation    \\ \hline
+4        & 15          & 70                   & 6                     & 68                       & 58,256                          \\
+6        & 149         & 15259                & 1667                  & 8873,2                   & 5215,761                        \\
+8        & 1965        & Not enough resources & 1738                  & 7276                     & 7831,915                       
+\end{tabular}
+\label{tab:h0-expanded}
+\end{table}
+
+\begin{table}[]
+\caption{Path cost for the \textit{null} heuristic function}
+\centering
+\begin{tabular}{llllll}
+Path cost &             &                      &                       &                          &                                 \\ \hline
+N         & Incremental & CompetelFirstRow     & ComplEveryCol Best    & ComplEveryCol Average    & ComplEveryCol Std. Deviation    \\ \hline
+4         & 4           & 3                    & 1                     & 2,2                      & 0,919                           \\
+6         & 6           & 5                    & 3                     & 4,2                      & 0,632                           \\
+8         & 8           & Not enough resources & 3                     & 3                        & 0,000
+\end{tabular}
+\label{tab:h0-pathcost}
+\end{table}
+% Number of attacking pairs
+\subsubsection{Number of attacking pairs}
+For the \textit{number of attacking pairs} heuristic the results obtained are listed below in the form of two tables. \textbf{Table 3} shows the expanded nodes for every version as well as the best, average and standard deviation for the completed version with queens in every column. \textbf{Table 4} shows the same information but for the path cost of the solution.
+
+\begin{table}[]
+\caption{Expanded nodes for the \textit{number of attacking pairs} heuristic function}
+\centering
+\begin{tabular}{llllll}
+Expanded &                      &                  &                       &                          &                                 \\ \hline
+N        & Incremental          & CompleteFirstRow & ComplEveryCol Best    & ComplEveryCol Average    & ComplEveryCol Std. Deviation    \\ \hline
+4        & 15                   & 4                & 2                     & 6,7                      & 4,855                           \\
+6        & 149                  & 76               & 3                     & 30,1                     & 17,527                          \\
+8        & 1965                 & 14               & 11                    & 37,2                     & 24,521                          \\
+16       & Not enough resources & 77               & 9                     & 194                      & 172,059                        
+\end{tabular}
+\label{tab:nattackingpairs-expanded}
+\end{table}
+
+\begin{table}[]
+\caption{Path cost for the \textit{number of attacking pairs} heuristic function}
+\centering
+\begin{tabular}{llllll}
+Path cost &                      &                  &                       &                          &                                 \\ \hline
+N         & Incremental          & CompleteFirstRow & ComplEveryCol Best    & ComplEveryCol Average    & ComplEveryCol Std. Deviation    \\ \hline
+4         & 4                    & 3                & 2                     & 2,8                      & 0,632                           \\
+6         & 6                    & 6                & 3                     & 4,1                      & 0,738                           \\
+8         & 8                    & 8                & 4                     & 4,9                      & 0,876                           \\
+16        & Not enough resources & 17               & 7                     & 9                        & 1,333
+\end{tabular}
+\label{tab:nattackingpairs-pathcost}
+\end{table}
+% Probabilistic estimation of solution
+\subsubsection{Probabilistic estimation of solution}
+For the \textit{probabilist estimation of solution} heuristic the results obtained are listed below in the form of two tables. \textbf{Table 5} shows the expanded nodes for every version as well as the best, average and standard deviation for the completed version with queens in every column. Note that for $n = 8$ the average and best case of the complete version with queens in every column are the same. This is because only one of ten executions was able to finish.  \textbf{Table 6} shows the same information but for the path cost of the solution.
+
+\begin{table}[]
+\caption{Expanded nodes for the \textit{probabilistic estimation of solution} heuristic function}
+\centering
+\begin{tabular}{llllll}
+Expanded &                      &                      &                      &                       &                              \\ \hline
+N        & Incremental          & CompleteFirstRow     & ComplEveryCol Best   & ComplEveryCol Average & ComplEveryCol Std. Deviation \\ \hline
+4        & 15                   & 70                   & 26                   & 84,2                  & 49,161                       \\
+6        & 149                  & 15259                & 576                  & 8464,5                & 7253,468                     \\
+8        & 1965                 & Not enough resources & 20081                & 20081                 & 0,000                        \\
+16       & Not enough resources & Not enough resources & Not enough resources & Not enough resources  & Not enough resources        
+\end{tabular}
+\label{tab:probestimation-expanded}
+\end{table}
+
+\begin{table}[]
+\caption{Path cost for the \textit{probabilistic estimation of solution} heuristic function}
+\centering
+\label{tab:probestimation-pathcost}
+\begin{tabular}{llllll}
+Path cost &                      &                      &                      &                       &                              \\ \hline
+N         & Incremental          & CompleteFirstRow     & ComplEveryCol Best   & ComplEveryCol Average & ComplEveryCol Std. Deviation \\ \hline
+4         & 4                    & 3                    & 2                    & 2,5                   & 0,527                        \\
+6         & 6                    & 5                    & 3                    & 3,9                   & 0,738                        \\
+8         & 8                    & Not enough resources & 3                    & 3                     & 0,000                        \\
+16        & Not enough resources & Not enough resources & Not enough resources & Not enough resources  & Not enough resources        
+\end{tabular}
+\end{table}
+% Genetic algorithm results
+\subsection{GA Results}\label{gen_results}
+Now the data obtained from the executions of the genetic algorithm will be shown in the form of two tables. \textbf{Table 7} shows the parameter values for the genetic algorithm. \textbf{Table 8} shows the average and best fitness values, the standard deviation and the number of solutions for each ten executions of the problem.
+
+\begin{table}[]
+\centering
+\begin{tabular}{l|l}
+pop size      & 50   \\ \hline
+mutation prob & 0.15 \\ \hline
+n generations & 100 
+\end{tabular}
+\caption{Parameters of the genetic algorithm}
+\label{tab:ag-parameters}
+\end{table}
+
+\begin{table}[]
+\centering
+\begin{tabular}{lllll}
+N  & Best Fitness & Average Fitness & Std. Deviation & Valid Solutions      \\ \hline
+4  & 6            & 6               & 0              & 10                   \\
+6  & 15           & 15              & 0              & 10                   \\
+8  & 28           & 28              & 0              & 10                   \\
+16 & 120          & 119,5           & 0,527          & 5                    \\
+32 & 493          & 492,3           & 0,949          & 0
+\end{tabular}
+\caption{Data obtained for the genetic algorithm}
+\label{tab:ag-data}
+\end{table}
+% Comparison of A* and GA results
+\subsection{Comparison of A* and GA results}\label{comparison_astar_gen}
+Once both algorithms have been tested, an analysis of the data will be performed.
+
+% A* results
+\paragraph{A*} 
+In the case of A* a study on the best \textbf{space of search} and \textbf{heuristic function} was carried out. Of the three spaces of search present in this paper, these being both versions of the complete space of search and the incremental space of search, a better performance overall is observed in the case of the complete version with the $n$ queens in \textbf{every column} of the board. In the case of heuristic functions, the one with the greatest results is the \textbf{number of attacking pairs} heuristic function.
+
+% AG results
+\paragraph{GA}
+In the case of the genetic algorithm a study focusing on the results given some fixed parameters was conducted. The algorithm finished the execution in every instance of $n$. However, as the value of $n$ increased the number of found valid solutions started to drop in a quick manner, not being able to find a soluton for $n = 32$. 
+
+% Comparison
+\paragraph{Comparison}
+According to the data it can be said that the genetic algorithm was able to finish the execution of the problem for all cases studied whereas the A* could not in most spaces of search with some heuristic functions, probably due to the specs of the environment machine used for the tests. However, A* with the \textit{number of attacking pairs} heuristic and the complete space of search placing the $n$ queens in every column is able to find the solution for $n = 16$ in a more reliable way than the genetic algorithm. To sum up, genetic algorithms are more efficient but when $n$ increases the proability of finding a solution lowers whereas A* with the right configuration can obtain great results but requires a greater computational process.
+
+% Conclusions
+\section{Conclusions}\label{conclusions}
+After performing both a theoretical and a experimental study of the problem and the algorithms, it can be concluded that there is no clear better solution for the N-queens problem. The A* algorithm always gives the optimal solution but requires big computational calculations whereas the genetic algorithm is more efficient but does not always give optimal solutions. With this conclusion the research is over.
+% Bibliography
+\begin{thebibliography}{8}
+\bibitem{inteligencia_artificial}
+J. Palma, R. Marín (Eds): Inteligencia Artificial. Técnicas, métodos y aplicaciones. McGraw Hill. 2008.
+
+\bibitem{artificial_intelligence}
+Stuart Russell, Peter Norvig: Artificial Intelligence: A Modern Approach. 3rd Ed. Pearson. 2010.
+
+\bibitem{ag_tutorial}
+MA. González, R. Varela: Tutorial on Genetic Algorithms. Computing department. University of Oviedo.
+
+\bibitem{darwin}
+C. Darwin: On the Origin of Species by Means of Natural Selection, or the Preservation of Favoured Races in the Struggle for Life. John Murray. 1859.
+ 
+\bibitem{aimajava}
+Github's repository page for the \textit{aima-java} project, \url{https://github.com/aimacode/aima-java}. Last accesed 1 November 2020.
+\end{thebibliography}
+\end{document}
+
