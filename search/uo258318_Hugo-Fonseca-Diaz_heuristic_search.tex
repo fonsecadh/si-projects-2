@@ -87,24 +87,25 @@ A genetic algorithm has the following components:
 Two ways of modeling the search space have been defined for this problem:
 \begin{itemize}
     \item \textbf{Incremental:} in this version, the initial state is the empty gameboard and in each iteration a new queen is placed in a position such as it is not attacking or being attacked by any other queen in the board. This keeps going until the N queens are placed or until there are no locations in the board where the queen can be placed without breaking the constraints.
-    \item \textbf{Complete:} in this version, the initial state is a board where the N queens are already placed. However, the queens can be in locations where they are attacking one another. In each iteration a queen is moved to a different position until a state where no pair of queens are attacking themselves is reached. There are two variants:
+    \item \textbf{Complete:} in this version, the initial state is a board where the N queens are already placed. However, the queens can be in locations where they are attacking one another. In each iteration a queen is moved to a different position until a state where no pair of queens are attacking themselves is reached. There are three variants:
     \begin{itemize}
         \item \textbf{Queens in first row:} in this variant the n queens are placed in the first row of the board.
         \item \textbf{Queens in every column:} in this variant the n queens are placed in random positions of the board, so different executions can lead to different results.
+        \item \textbf{Queens in every column and row:} in this variant the n queens are again placed in random positions of the board, such that there are no pair of queens in the same row or column.
     \end{itemize}
 \end{itemize}
-Three heuristic functions were implemented for solving the problem:
+Different heuristics were implemented for solving the problem, but the following three were selected for the research:
 \begin{itemize}
     \item \textbf{Null heuristic:} heuristic function that always return zero. It is an admissible and a monotonous heuristic.  
-    \item \textbf{Number of attacking pairs:} heuristic function that estimates de number of necessary movements in order to achieve a solution by means of analysing the number of attacking pairs in a board where there are already N queens placed. It is an admissible and a monotonous heuristic.
-    \item \textbf{Probabilistic estimation of solution:} heuristic function that estimates the probability of finding a solution from any given state. It is an admissible heuristic. 
+    \item \textbf{Number of attacking pairs:} heuristic function that estimates de number of necessary movements in order to achieve a solution by means of analysing the number of attacking pairs in a board where there are already N queens placed. It is not admissible, given that there can be situations in which the number of attacking pairs is greater than the cost of reaching the solution. For example, if a queen is attacked by two or more queens, and after moving it we reach the solution, that would mean that $h(n) > h^{*}(n)$, so the heuristic cannot be admissible. 
+    \item \textbf{Probabilistic estimation of solution:} heuristic function that estimates the probability of finding a solution from any given state. It is calculated by $h(n) = (N-k) / P(n)$, where $N$ is the total number of queens to be placed, $k$ the number of queens already placed, and $P(n)$ a probability of finding a solution from $n$. It is an admissible heuristic. 
 \end{itemize}
 % Application of genetic algorithms to the N-queens problem
 \section{Applications of genetic algorithms to the N-queens problem}\label{gen_nqueens}
 The genetic algorithm implemented for solving the N-queens problem has the following characteristics:
 \begin{itemize}
     \item \textbf{Codification scheme:} a chain of permutations that contains the rows in which the queens are located.
-    \item \textbf{Fitness function:} implements fitness scaling, that is, to further differenciate the good chromosomes from the bad ones. The way it is done is by substracting from the fitness value of all individuals the fitness value of the worst in that generation. 
+    \item \textbf{Fitness function:} it evaluates the number of pairs of queens not being attacked. It also implements fitness scaling, that is, to further differenciate the good chromosomes from the bad ones. The way it is done is by substracting from the fitness value of all individuals the fitness value of the worst in that generation. 
     \item \textbf{Generating the initial population:} a chromosome is a random permutation of the numbers ranged from one to the size of the board such as no number is repeated.
     \item A set of \textbf{genetic operators}. 
     \begin{itemize}
@@ -112,16 +113,21 @@ The genetic algorithm implemented for solving the N-queens problem has the follo
         \item \textbf{Crossover:} implements the OX (Order crossover) operator. This method of crossover implies that the offspring will inherit the order and position of some of the genes of a parent and the relative order of the remaining genes of the other parent.
         \item \textbf{Mutation:} swaps the content of two random positions of the permutation.
     \end{itemize}
-    \item \textbf{Parameters:} $Population size = 50$, $mutation probability = 0.15$, $number of generations = 100$.
+    \item \textbf{Parameters:}
+    \begin{itemize}
+        \item Population size = 50
+        \item Mutation probability = 0.15
+        \item Variable number of generations according to N.
+    \end{itemize}
 \end{itemize}
 % Experimental Research
 \section{Experimental Research}\label{exp_research}
-The behaviours of the A* and genetic algorithm previously defined are going to be measured next. For this, a modified version of the \textit{aima-java} project available at \cite{aimajava} is used. As the name implies, these algorithms are implemented in the \textit{Java} programming language.
+The behaviours of the A* and genetic algorithm previously defined are going to be measured next. For this, a modified version of the \textit{aima-java} project \cite{aimajava} is used. As the name implies, these algorithms are implemented in the \textit{Java} programming language.
 
 For the enviroment used to test the algorithms the following information is listed:
 \begin{itemize}
     \item \textbf{Operating system:} Manjaro Linux \textit{x86-64}
-    \item \textbf{Kernel:} 5.7.19-2-MANJARO
+    \item \textbf{Kernel:} 5.10.30-1-MANJARO
     \item \textbf{Host:} 81DE Lenovo ideapad 330-15IKB
     \item \textbf{CPU:} Intel i7-8550U (8) @ 4.000GHz
     \item \textbf{RAM:} 8GB
@@ -143,6 +149,12 @@ The problems to be resolved are the following:
                 \item \textit{Probabilistic estimation of solution}
             \end{itemize}
             \item \textbf{In every column:} executed ten times for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The average and best execution will be listed. The following heuristic functions will be tested:
+            \begin{itemize}
+                \item \textit{Null heuristic}
+                \item \textit{Number of attacking pairs}
+                \item \textit{Probabilistic estimation of solution}
+            \end{itemize}
+            \item \textbf{In every column and row:} executed ten times for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The average and best execution will be listed. The following heuristic functions will be tested:
             \begin{itemize}
                 \item \textit{Null heuristic}
                 \item \textit{Number of attacking pairs}
