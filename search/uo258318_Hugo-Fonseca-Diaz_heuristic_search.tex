@@ -15,7 +15,7 @@
 % Document
 \begin{document}
 % Title
-\title{Heuristic Search Practices. Course 2020-2021. N-queens with A* and Genetic Algorithms.}
+\title{Heuristic Search Practices. Course 2021-2022. N-queens with A* and Genetic Algorithms.}
 \author{Hugo Fonseca Díaz\\ \email{uo258318@uniovi.es}}
 \institute{School of Computing Engineering. University of Oviedo.}
 \maketitle
@@ -77,11 +77,11 @@ A genetic algorithm has the following components:
     \item A way of \textbf{generating the initial population}. This method of creating initial populations can be done by the use of an heuristic function or, in the simplest case, making a random population disregarding their level of quality.
     \item A set of \textbf{genetic operators}. 
         \begin{itemize}
-            \item \textbf{Selection:} operator that chooses a set of individuals from the current generation to be the parents for the next generation. Some selection operators include \textit{Fitness-Proportionale Selection (or Roulette Selection)}, \textit{Stochastic Universal Sampling} and \textit{Tournament Selection}.
+            \item \textbf{Selection:} operator that chooses a set of individuals from the current generation to be the parents for the next generation. Some selection operators include \textit{Fitness-Proportional Selection (or Roulette Selection)}, \textit{Stochastic Universal Sampling} and \textit{Tournament Selection}.
             \item \textbf{Crossover:} operator that combines two or more parents to obtain offsprings that most likely will inherit characteristics from their parents. There are three classic ways of doing crossovers in vectors representing states: \textit{One-Point}, \textit{Two-Point} and \textit{Uniform Crossover}.
             \item \textbf{Mutation:} operator that makes minor random changes in the genetic structure of a chromosome in order to obtain a new range of genetic material. One example of a mutation operator is \textit{bit-flip mutation}.
         \end{itemize}
-    \item Some \textbf{parameters}. Like the population size, number of generations, crossover probability, mutation probability, etc.
+    \item Some \textbf{parameters}, like the population size, number of generations, crossover probability, mutation probability, etc.
 \end{itemize}
 % Application of A* algorithm to the N-queens problem
 \section{Application of A* algorithm to the N-queens problem}\label{astar_nqueens}
@@ -143,31 +143,11 @@ The problems to be resolved are the following:
         \begin{itemize}
             \item \textbf{Complete version:}
                 \begin{itemize}
-                    \item \textbf{In the first row:} executed one time for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The following heuristic functions will be tested:
-                        \begin{itemize}
-                            \item \textit{Null heuristic}
-                            \item \textit{Number of attacking pairs}
-                            \item \textit{Probabilistic estimation of solution}
-                        \end{itemize}
-                    \item \textbf{In every column:} executed ten times for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The average and best execution will be listed. The following heuristic functions will be tested:
-                        \begin{itemize}
-                            \item \textit{Null heuristic}
-                            \item \textit{Number of attacking pairs}
-                            \item \textit{Probabilistic estimation of solution}
-                        \end{itemize}
-                    \item \textbf{In every column and row:} executed ten times for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The average and best execution will be listed. The following heuristic functions will be tested:
-                        \begin{itemize}
-                            \item \textit{Null heuristic}
-                            \item \textit{Number of attacking pairs}
-                            \item \textit{Probabilistic estimation of solution}
-                        \end{itemize}
+                    \item \textbf{In the first row:} executed one time for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The following heuristic functions will be tested: \textit{Null heuristic}, \textit{Number of attacking pairs} and \textit{Probabilistic estimation of solution}.
+                    \item \textbf{In every column:} executed ten times for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The average and best execution will be listed. The following heuristic functions will be tested: \textit{Null heuristic}, \textit{Number of attacking pairs} and \textit{Probabilistic estimation of solution}.
+                    \item \textbf{In every column and row:} executed ten times for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The average and best execution will be listed. The following heuristic functions will be tested: \textit{Null heuristic}, \textit{Number of attacking pairs} and \textit{Probabilistic estimation of solution}.
                 \end{itemize}
-            \item \textbf{Incremental version:} executed one time for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The following heuristic functions will be tested:
-                \begin{itemize}
-                    \item \textit{Null heuristic}
-                    \item \textit{Number of attacking pairs}
-                    \item \textit{Probabilistic estimation of solution}
-                \end{itemize}
+            \item \textbf{Incremental version:} executed one time for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The following heuristic functions will be tested: \textit{Null heuristic}, \textit{Number of attacking pairs} and \textit{Probabilistic estimation of solution}.
         \end{itemize}
     \item \textbf{Genetic algorithm:} executed ten times for each $n$ in range 4, 6, 8, 16 and 32. The average and best execution will be listed.
 \end{itemize}
@@ -184,7 +164,11 @@ The results obtained in the executions of A* are shown next. Note that:
 \end{itemize}
 % Null heuristic
 \subsubsection{Null heuristic}
-For the \textit{null} heuristic the measurements obtained are listed below in the form of two tables. \ref{tab:h0-expanded} shows the expanded nodes for every version as well as the best, average and standard deviation for the completed version with queens in every column. Note that for $n = 8$ the average expanded nodes for the complete version with queens in every column is lower than for $n = 6$. This is because only two of ten executions were able to finish, and those were the ones with the lower expanded nodes. \ref{tab:h0-pathcost} shows the same information but for the path cost of the solution.
+For the \textit{null} heuristic the measurements obtained are listed below in the form of two tables. Table \ref{tab:h0-expanded} shows the expanded nodes for every version as well as the best, average and standard deviation for the complete version with queens in every column. 
+
+Note that for $n = 8$ the average expanded nodes for the complete version with queens in every column is lower than for $n = 6$. This is because only two of ten executions were able to finish, and those were the ones with the lower expanded nodes. The same applies to the complete version with queens in every column and row. Also note that, in the case of the complete version with queens in every column and row, in some cases the best result is cero. This is because the randomly generated initial board represents a valid solution. 
+
+Table \ref{tab:h0-pathcost} shows the same information but for the path cost of the solution.
 
 \begin{table}[H]
     \caption{Expanded nodes for the \textit{null} heuristic function}
@@ -206,18 +190,18 @@ For the \textit{null} heuristic the measurements obtained are listed below in th
     \centering
     \resizebox{1 \textwidth}{!} { % Resize table
         \begin{tabular}{|l|l|l|l|l|l|l|l|l|}
-        \hline
+            \hline
             N & INC & CFR & CEC Best & CEC Average & CEC Std. Deviation & CECR Best & CECR Average & CECR Std. Deviation \\ \hline
             4 & 4 & 3 & 1 & 2,2 & 0,919 & 0	& 2,6 & 1,265 \\
             6 & 6 & 5 & 3 & 4,2 & 0,632 & 3	& 4,1 & 0,738 \\
             8 & 8 & NER & 3 & 3 & 0,000 & 2	& 1,1 & 0,500 \\ \hline
-    \end{tabular}
-    } % Close resize
-    \label{tab:h0-pathcost}
+        \end{tabular}
+        } % Close resize
+        \label{tab:h0-pathcost}
 \end{table}
 % Number of attacking pairs
 \subsubsection{Number of attacking pairs}
-For the \textit{number of attacking pairs} heuristic the results obtained are listed below in the form of two tables. \ref{tab:nattackingpairs-expanded} shows the expanded nodes for every version as well as the best, average and standard deviation for the completed version with queens in every column. \ref{tab:nattackingpairs-pathcost} shows the same information but for the path cost of the solution.
+For the \textit{number of attacking pairs} heuristic the results obtained are listed below in the form of two tables. Table \ref{tab:nattackingpairs-expanded} shows the expanded nodes for every version as well as the best, average and standard deviation for the completed version with queens in every column. Table \ref{tab:nattackingpairs-pathcost} shows the same information but for the path cost of the solution.
 
 \begin{table}[H]
     \caption{Expanded nodes for the \textit{number of attacking pairs} heuristic function}
@@ -230,9 +214,9 @@ For the \textit{number of attacking pairs} heuristic the results obtained are li
             6 & 149 & 76 & 3 & 30,1 & 17,527 & 3 & 54,6 & 52,570 \\
             8 & 1965 & 14 & 11 & 37,2 & 24,521 & 6 & 29,5 &	29,334 \\
             16 & NER & 77 & 9 & 194 & 172,059 & 23 & 467,3 & 672,706 \\ \hline
-    \end{tabular}
-    } % Close resize
-    \label{tab:nattackingpairs-expanded}
+        \end{tabular}
+        } % Close resize
+        \label{tab:nattackingpairs-expanded}
 \end{table}
 
 \begin{table}[H]
@@ -246,13 +230,17 @@ For the \textit{number of attacking pairs} heuristic the results obtained are li
             6 & 6 & 6 & 3 & 4,1 & 0,738 & 2 & 3,8 & 1,135 \\
             8 & 8 & 8 & 4 & 4,9 & 0,876 & 3	& 4,4 &	0,966 \\
             16 & NER & 17 & 7 & 9 & 1,333 & 6 & 7,6 & 1,776 \\ \hline
-    \end{tabular}
-    } % Close resize
-    \label{tab:nattackingpairs-pathcost}
+        \end{tabular}
+        } % Close resize
+        \label{tab:nattackingpairs-pathcost}
 \end{table}
 % Probabilistic estimation of solution
 \subsubsection{Probabilistic estimation of solution}
-For the \textit{probabilist estimation of solution} heuristic the results obtained are listed below in the form of two tables. \ref{tab:probestimation-expanded} shows the expanded nodes for every version as well as the best, average and standard deviation for the completed version with queens in every column. Note that for $n = 8$ the average and best case of the complete version with queens in every column are the same. This is because only one of ten executions was able to finish.  \ref{tab:probestimation-pathcost} shows the same information but for the path cost of the solution.
+For the \textit{probabilist estimation of solution} heuristic the results obtained are listed below in the form of two tables. Table \ref{tab:probestimation-expanded} shows the expanded nodes for every version as well as the best, average and standard deviation for the completed version with queens in every column. 
+
+Note that for $n = 8$ the average and best case of the complete version with queens in every column are the same. This is because only one of ten executions was able to finish. 
+
+Table \ref{tab:probestimation-pathcost} shows the same information but for the path cost of the solution.
 
 \begin{table}[H]
     \caption{Expanded nodes for the \textit{probabilistic estimation of solution} heuristic function}
@@ -265,9 +253,9 @@ For the \textit{probabilist estimation of solution} heuristic the results obtain
             6 & 149 & 15259 & 576 & 8464,5 & 7253,468 & 249 & 6621,1 & 6357,683 \\
             8 & 1965 & NER & 20081 & 20081 & 0,000 & 335 & 396,2 & 1291,440 \\
             16 & NER & NER & NER & NER & NER & NER & NER & NER \\ \hline         
-    \end{tabular}
-    } % Close resize
-    \label{tab:probestimation-expanded}
+        \end{tabular}
+        } % Close resize
+        \label{tab:probestimation-expanded}
 \end{table}
 
 \begin{table}[H]
@@ -282,44 +270,51 @@ For the \textit{probabilist estimation of solution} heuristic the results obtain
             6 & 6 & 5 & 3 & 3,9 & 0,738 & 2 & 3,7 & 0,949 \\
             8 & 8 & NER & 3 & 3 & 0,000 & 2 & 0,7 &	0,577 \\
             16 & NER & NER & NER & NER  & NER & NER & NER  & NER \\ \hline        
-    \end{tabular}
-    } % Close resize
+        \end{tabular}
+        } % Close resize
 \end{table}
 % Genetic algorithm results
 \subsection{GA Results}\label{gen_results}
-Now the data obtained from the executions of the genetic algorithm will be shown in the form of two tables. \ref{tab:ag-parameters} shows the parameter values for the genetic algorithm. \ref{tab:ag-data} shows the average and best fitness values, the standard deviation and the number of solutions for each ten executions of the problem.
+Now the data obtained from the executions of the genetic algorithm will be shown in the form of two tables. Table \ref{tab:ag-data}  shows the average and best fitness values, the standard deviation and the number of solutions for each ten executions of the problem with the initial parameters. Table \ref{tab:ag-data-2} shows the execution of the problem with $N=16$ and different parameters.
+
+The initial parameters for the GA consisted of a population size of 50, a mutation probability of 0.15 and 100 generations. The data obtained with this parameters is shown next.
 
 \begin{table}[H]
-    \centering
-    \begin{tabular}{l|l}
-        pop size      & 50   \\ \hline
-        mutation prob & 0.15 \\ \hline
-        n generations & 100 
-    \end{tabular}
-    \caption{Parameters of the genetic algorithm}
-    \label{tab:ag-parameters}
-\end{table}
-
-\begin{table}[H]
+    \caption{Data obtained for the genetic algorithm with the initial parameters}
     \centering
     \begin{tabular}{|l|l|l|l|l|}
+        \hline
         N  & Best Fitness & Average Fitness & Std. Deviation & Valid Solutions      \\ \hline
         4  & 6            & 6               & 0              & 10                   \\
         6  & 15           & 15              & 0              & 10                   \\
         8  & 28           & 28              & 0              & 10                   \\
         16 & 120          & 119,5           & 0,527          & 5                    \\
-        32 & 493          & 492,3           & 0,949          & 0
+        32 & 493          & 492,3           & 0,949          & 0                    \\ \hline
     \end{tabular}
-    \caption{Data obtained for the genetic algorithm}
     \label{tab:ag-data}
 \end{table}
+
+Now, another execution of the problem for $N=16$ is presented. This time the number of generations were incremented up to 200.
+
+\begin{table}[H]
+    \caption{Data obtained for the genetic algorithm with 200 generations.}
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        N  & Best Fitness & Average Fitness & Std. Deviation & Valid Solutions      \\ \hline
+        16 & 120          & 119,9           & 0,316          & 9                    \\ \hline
+    \end{tabular}
+    \label{tab:ag-data-2}
+\end{table}
+
+For $N=32$, different alterations to the initial parameters were done in order to get valid solutions, but none gave good results.
 % Comparison of A* and GA results
 \subsection{Comparison of A* and GA results}\label{comparison_astar_gen}
 Once both algorithms have been tested, an analysis of the data will be performed.
 
 % A* results
 \paragraph{A*} 
-In the case of A* a study on the best \textbf{space of search} and \textbf{heuristic function} was carried out. Of the three spaces of search present in this paper, these being both versions of the complete space of search and the incremental space of search, a better performance overall is observed in the case of the complete version with the $n$ queens in \textbf{every column} of the board. In the case of heuristic functions, the one with the greatest results is the \textbf{number of attacking pairs} heuristic function.
+In the case of A* a study on the best \textbf{space of search} and \textbf{heuristic function} was carried out. Of the fourth search spaces present in this paper, these being all versions of the complete space of search and the incremental space of search, a better performance overall is observed in the case of the complete version with the $n$ queens in \textbf{every column and row} of the board. In the case of heuristic functions, the one with the greatest results is the \textbf{number of attacking pairs} heuristic function.
 
 % AG results
 \paragraph{GA}
@@ -327,7 +322,7 @@ In the case of the genetic algorithm a study focusing on the results given some 
 
 % Comparison
 \paragraph{Comparison}
-According to the data it can be said that the genetic algorithm was able to finish the execution of the problem for all cases studied whereas the A* could not in most spaces of search with some heuristic functions, probably due to the specs of the environment machine used for the tests. However, A* with the \textit{number of attacking pairs} heuristic and the complete space of search placing the $n$ queens in every column is able to find the solution for $n = 16$ in a more reliable way than the genetic algorithm. To sum up, genetic algorithms are more efficient but when $n$ increases the proability of finding a solution lowers whereas A* with the right configuration can obtain great results but requires a greater computational process.
+According to the data, it can be said that the genetic algorithm was able to finish the execution of the problem for all cases studied whereas the A* could not in most spaces of search with some heuristic functions, probably due to the specs of the environment machine used for the tests. Both A* with the \textit{number of attacking pairs} heuristic and the GA give very solid results up to $N=16$. To sum up, genetic algorithms are more efficient but when $n$ increases the proability of finding a solution lowers whereas A* with the right configuration can obtain great results but requires a greater computational process.
 
 % Conclusions
 \section{Conclusions}\label{conclusions}
