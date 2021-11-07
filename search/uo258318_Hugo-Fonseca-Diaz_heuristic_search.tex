@@ -10,6 +10,7 @@
 \usepackage{csquotes}
 \usepackage{lastpage}
 \usepackage{array}
+\usepackage{float}
 
 % Document
 \begin{document}
@@ -20,9 +21,9 @@
 \maketitle
 % Abstract
 \begin{abstract}
-This paper conducts a theoretical and experimental research in order to solve the N-queens problem with two algorithms, the A* algorithm and a genetic algorithm. The first part of the document consists in a formal definition of the problem and of both algorithms, as well as how they are adapted in order to solve this particular N-queens problem. Data is then extracted from several executions of both algorithms and an analysis of the results is carried out. The paper ends with a comparison of both approaches and a small conclusion summing up everything that it covered. 
-% Keywords
-\keywords{A* \and Genetic algorithms \and N-queens problem 
+    This paper conducts a theoretical and experimental research in order to solve the N-queens problem with two algorithms, the A* algorithm and a genetic algorithm. The first part of the document consists in a formal definition of the problem and of both algorithms, as well as how they are adapted in order to solve this particular N-queens problem. Data is then extracted from several executions of both algorithms and an analysis of the results is carried out. The paper ends with a comparison of both approaches and a small conclusion summing up everything that it covered. 
+    % Keywords
+    \keywords{A* \and Genetic algorithms \and N-queens problem 
     \and Heuristic Search \and Metaheuristics.}
 \end{abstract}
 % Introduction
@@ -75,11 +76,11 @@ A genetic algorithm has the following components:
     \item A \textbf{fitness function}. This function is used to evaluate each individual and assign to them a value used for their selection as potential parents for the next generation. The fitness value is the non-negative value representing the performance of a given individual. The fitness function should return higher values for individuals with better performance.
     \item A way of \textbf{generating the initial population}. This method of creating initial populations can be done by the use of an heuristic function or, in the simplest case, making a random population disregarding their level of quality.
     \item A set of \textbf{genetic operators}. 
-    \begin{itemize}
-        \item \textbf{Selection:} operator that chooses a set of individuals from the current generation to be the parents for the next generation. Some selection operators include \textit{Fitness-Proportionale Selection (or Roulette Selection)}, \textit{Stochastic Universal Sampling} and \textit{Tournament Selection}.
-        \item \textbf{Crossover:} operator that combines two or more parents to obtain offsprings that most likely will inherit characteristics from their parents. There are three classic ways of doing crossovers in vectors representing states: \textit{One-Point}, \textit{Two-Point} and \textit{Uniform Crossover}.
-        \item \textbf{Mutation:} operator that makes minor random changes in the genetic structure of a chromosome in order to obtain a new range of genetic material. One example of a mutation operator is \textit{bit-flip mutation}.
-    \end{itemize}
+        \begin{itemize}
+            \item \textbf{Selection:} operator that chooses a set of individuals from the current generation to be the parents for the next generation. Some selection operators include \textit{Fitness-Proportionale Selection (or Roulette Selection)}, \textit{Stochastic Universal Sampling} and \textit{Tournament Selection}.
+            \item \textbf{Crossover:} operator that combines two or more parents to obtain offsprings that most likely will inherit characteristics from their parents. There are three classic ways of doing crossovers in vectors representing states: \textit{One-Point}, \textit{Two-Point} and \textit{Uniform Crossover}.
+            \item \textbf{Mutation:} operator that makes minor random changes in the genetic structure of a chromosome in order to obtain a new range of genetic material. One example of a mutation operator is \textit{bit-flip mutation}.
+        \end{itemize}
     \item Some \textbf{parameters}. Like the population size, number of generations, crossover probability, mutation probability, etc.
 \end{itemize}
 % Application of A* algorithm to the N-queens problem
@@ -88,11 +89,11 @@ Two ways of modeling the search space have been defined for this problem:
 \begin{itemize}
     \item \textbf{Incremental:} in this version, the initial state is the empty gameboard and in each iteration a new queen is placed in a position such as it is not attacking or being attacked by any other queen in the board. This keeps going until the N queens are placed or until there are no locations in the board where the queen can be placed without breaking the constraints.
     \item \textbf{Complete:} in this version, the initial state is a board where the N queens are already placed. However, the queens can be in locations where they are attacking one another. In each iteration a queen is moved to a different position until a state where no pair of queens are attacking themselves is reached. There are three variants:
-    \begin{itemize}
-        \item \textbf{Queens in first row:} in this variant the n queens are placed in the first row of the board.
-        \item \textbf{Queens in every column:} in this variant the n queens are placed in random positions of the board, so different executions can lead to different results.
-        \item \textbf{Queens in every column and row:} in this variant the n queens are again placed in random positions of the board, such that there are no pair of queens in the same row or column.
-    \end{itemize}
+        \begin{itemize}
+            \item \textbf{Queens in first row:} in this variant the n queens are placed in the first row of the board.
+            \item \textbf{Queens in every column:} in this variant the n queens are placed in random positions of the board, so different executions can lead to different results.
+            \item \textbf{Queens in every column and row:} in this variant the n queens are again placed in random positions of the board, such that there are no pair of queens in the same row or column.
+        \end{itemize}
 \end{itemize}
 Different heuristics were implemented for solving the problem, but the following three were selected for the research:
 \begin{itemize}
@@ -108,17 +109,17 @@ The genetic algorithm implemented for solving the N-queens problem has the follo
     \item \textbf{Fitness function:} it evaluates the number of pairs of queens not being attacked. It also implements fitness scaling, that is, to further differenciate the good chromosomes from the bad ones. The way it is done is by substracting from the fitness value of all individuals the fitness value of the worst in that generation. 
     \item \textbf{Generating the initial population:} a chromosome is a random permutation of the numbers ranged from one to the size of the board such as no number is repeated.
     \item A set of \textbf{genetic operators}. 
-    \begin{itemize}
-        \item \textbf{Selection:} introduces elitism, that is, the best individual of that generation is carried over the next generation.
-        \item \textbf{Crossover:} implements the OX (Order crossover) operator. This method of crossover implies that the offspring will inherit the order and position of some of the genes of a parent and the relative order of the remaining genes of the other parent.
-        \item \textbf{Mutation:} swaps the content of two random positions of the permutation.
-    \end{itemize}
+        \begin{itemize}
+            \item \textbf{Selection:} introduces elitism, that is, the best individual of that generation is carried over the next generation.
+            \item \textbf{Crossover:} implements the OX (Order crossover) operator. This method of crossover implies that the offspring will inherit the order and position of some of the genes of a parent and the relative order of the remaining genes of the other parent.
+            \item \textbf{Mutation:} swaps the content of two random positions of the permutation.
+        \end{itemize}
     \item \textbf{Parameters:}
-    \begin{itemize}
-        \item Population size = 50
-        \item Mutation probability = 0.15
-        \item Variable number of generations according to N.
-    \end{itemize}
+        \begin{itemize}
+            \item Population size = 50
+            \item Mutation probability = 0.15
+            \item Variable number of generations according to N.
+        \end{itemize}
 \end{itemize}
 % Experimental Research
 \section{Experimental Research}\label{exp_research}
@@ -139,158 +140,178 @@ This experimental research consists of a description of the dataset, a list of t
 The problems to be resolved are the following:
 \begin{itemize}
     \item \textbf{A*:}
-    \begin{itemize}
-        \item \textbf{Complete version:}
         \begin{itemize}
-            \item \textbf{In the first row:} executed one time for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The following heuristic functions will be tested:
-            \begin{itemize}
-                \item \textit{Null heuristic}
-                \item \textit{Number of attacking pairs}
-                \item \textit{Probabilistic estimation of solution}
-            \end{itemize}
-            \item \textbf{In every column:} executed ten times for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The average and best execution will be listed. The following heuristic functions will be tested:
-            \begin{itemize}
-                \item \textit{Null heuristic}
-                \item \textit{Number of attacking pairs}
-                \item \textit{Probabilistic estimation of solution}
-            \end{itemize}
-            \item \textbf{In every column and row:} executed ten times for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The average and best execution will be listed. The following heuristic functions will be tested:
-            \begin{itemize}
-                \item \textit{Null heuristic}
-                \item \textit{Number of attacking pairs}
-                \item \textit{Probabilistic estimation of solution}
-            \end{itemize}
+            \item \textbf{Complete version:}
+                \begin{itemize}
+                    \item \textbf{In the first row:} executed one time for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The following heuristic functions will be tested:
+                        \begin{itemize}
+                            \item \textit{Null heuristic}
+                            \item \textit{Number of attacking pairs}
+                            \item \textit{Probabilistic estimation of solution}
+                        \end{itemize}
+                    \item \textbf{In every column:} executed ten times for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The average and best execution will be listed. The following heuristic functions will be tested:
+                        \begin{itemize}
+                            \item \textit{Null heuristic}
+                            \item \textit{Number of attacking pairs}
+                            \item \textit{Probabilistic estimation of solution}
+                        \end{itemize}
+                    \item \textbf{In every column and row:} executed ten times for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The average and best execution will be listed. The following heuristic functions will be tested:
+                        \begin{itemize}
+                            \item \textit{Null heuristic}
+                            \item \textit{Number of attacking pairs}
+                            \item \textit{Probabilistic estimation of solution}
+                        \end{itemize}
+                \end{itemize}
+            \item \textbf{Incremental version:} executed one time for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The following heuristic functions will be tested:
+                \begin{itemize}
+                    \item \textit{Null heuristic}
+                    \item \textit{Number of attacking pairs}
+                    \item \textit{Probabilistic estimation of solution}
+                \end{itemize}
         \end{itemize}
-        \item \textbf{Incremental version:} executed one time for each heuristic function and $n$ in range 4, 6, 8, 16 and 32. The following heuristic functions will be tested:
-        \begin{itemize}
-            \item \textit{Null heuristic}
-            \item \textit{Number of attacking pairs}
-            \item \textit{Probabilistic estimation of solution}
-        \end{itemize}
-    \end{itemize}
     \item \textbf{Genetic algorithm:} executed ten times for each $n$ in range 4, 6, 8, 16 and 32. The average and best execution will be listed.
 \end{itemize}
 % Results
 \subsection{A* Results}\label{astar_results}
-The results obtained in the executions of A* are the following:
+The results obtained in the executions of A* are shown next. Note that:
+
+\begin{itemize}
+    \item \textbf{INC:} Incremental
+    \item \textbf{CFR:} Complete First Row
+    \item \textbf{CEC:} Complete Every Column
+    \item \textbf{CECR:} Complete Every Column and Row
+    \item \textbf{NER:} Not enough resources
+\end{itemize}
 % Null heuristic
 \subsubsection{Null heuristic}
-For the \textit{null} heuristic the measurements obtained are listed below in the form of two tables. \textbf{Table 1} shows the expanded nodes for every version as well as the best, average and standard deviation for the completed version with queens in every column. Note that for $n = 8$ the average expanded nodes for the complete version with queens in every column is lower than for $n = 6$. This is because only two of ten executions were able to finish, and those were the ones with the lower expanded nodes. \textbf{Table 2} shows the same information but for the path cost of the solution.
+For the \textit{null} heuristic the measurements obtained are listed below in the form of two tables. \ref{tab:h0-expanded} shows the expanded nodes for every version as well as the best, average and standard deviation for the completed version with queens in every column. Note that for $n = 8$ the average expanded nodes for the complete version with queens in every column is lower than for $n = 6$. This is because only two of ten executions were able to finish, and those were the ones with the lower expanded nodes. \ref{tab:h0-pathcost} shows the same information but for the path cost of the solution.
 
-\begin{table}[]
-\caption{Expanded nodes for the \textit{null} heuristic function}
-\centering
-\begin{tabular}{llllll}
-Expanded &             &                      &                       &                          &                                 \\ \hline
-N        & Incremental & CompleteFirstRow     & ComplEveryCol Best    & ComplEveryCol Average    & ComplEveryCol Std. Deviation    \\ \hline
-4        & 15          & 70                   & 6                     & 68                       & 58,256                          \\
-6        & 149         & 15259                & 1667                  & 8873,2                   & 5215,761                        \\
-8        & 1965        & Not enough resources & 1738                  & 7276                     & 7831,915                       
-\end{tabular}
-\label{tab:h0-expanded}
+\begin{table}[H]
+    \caption{Expanded nodes for the \textit{null} heuristic function}
+    \centering
+    \resizebox{1 \textwidth}{!} { % Resize table
+        \begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+            \hline
+            N & INC & CFR & CEC Best & CEC Average & CEC Std. Deviation & CECR Best & CECR Average & CECR Std. Deviation \\ \hline
+            4 & 15 & 70 & 6 & 68 & 58,256 & 0 & 100,4 & 66,335 \\
+            6 & 149 & 15259 & 1667 & 8873,2 & 5215,761 & 671 & 7912,7 & 5673,944 \\
+            8 & 1965 & NER & 1738 & 7276 & 7831,915 & 1011 & 4831,1 & 7468,834 \\ \hline
+        \end{tabular}
+        } % Close resize
+        \label{tab:h0-expanded}
 \end{table}
 
-\begin{table}[]
-\caption{Path cost for the \textit{null} heuristic function}
-\centering
-\begin{tabular}{llllll}
-Path cost &             &                      &                       &                          &                                 \\ \hline
-N         & Incremental & CompetelFirstRow     & ComplEveryCol Best    & ComplEveryCol Average    & ComplEveryCol Std. Deviation    \\ \hline
-4         & 4           & 3                    & 1                     & 2,2                      & 0,919                           \\
-6         & 6           & 5                    & 3                     & 4,2                      & 0,632                           \\
-8         & 8           & Not enough resources & 3                     & 3                        & 0,000
-\end{tabular}
-\label{tab:h0-pathcost}
+\begin{table}[H]
+    \caption{Path cost for the \textit{null} heuristic function}
+    \centering
+    \resizebox{1 \textwidth}{!} { % Resize table
+        \begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+        \hline
+            N & INC & CFR & CEC Best & CEC Average & CEC Std. Deviation & CECR Best & CECR Average & CECR Std. Deviation \\ \hline
+            4 & 4 & 3 & 1 & 2,2 & 0,919 & 0	& 2,6 & 1,265 \\
+            6 & 6 & 5 & 3 & 4,2 & 0,632 & 3	& 4,1 & 0,738 \\
+            8 & 8 & NER & 3 & 3 & 0,000 & 2	& 1,1 & 0,500 \\ \hline
+    \end{tabular}
+    } % Close resize
+    \label{tab:h0-pathcost}
 \end{table}
 % Number of attacking pairs
 \subsubsection{Number of attacking pairs}
-For the \textit{number of attacking pairs} heuristic the results obtained are listed below in the form of two tables. \textbf{Table 3} shows the expanded nodes for every version as well as the best, average and standard deviation for the completed version with queens in every column. \textbf{Table 4} shows the same information but for the path cost of the solution.
+For the \textit{number of attacking pairs} heuristic the results obtained are listed below in the form of two tables. \ref{tab:nattackingpairs-expanded} shows the expanded nodes for every version as well as the best, average and standard deviation for the completed version with queens in every column. \ref{tab:nattackingpairs-pathcost} shows the same information but for the path cost of the solution.
 
-\begin{table}[]
-\caption{Expanded nodes for the \textit{number of attacking pairs} heuristic function}
-\centering
-\begin{tabular}{llllll}
-Expanded &                      &                  &                       &                          &                                 \\ \hline
-N        & Incremental          & CompleteFirstRow & ComplEveryCol Best    & ComplEveryCol Average    & ComplEveryCol Std. Deviation    \\ \hline
-4        & 15                   & 4                & 2                     & 6,7                      & 4,855                           \\
-6        & 149                  & 76               & 3                     & 30,1                     & 17,527                          \\
-8        & 1965                 & 14               & 11                    & 37,2                     & 24,521                          \\
-16       & Not enough resources & 77               & 9                     & 194                      & 172,059                        
-\end{tabular}
-\label{tab:nattackingpairs-expanded}
+\begin{table}[H]
+    \caption{Expanded nodes for the \textit{number of attacking pairs} heuristic function}
+    \centering
+    \resizebox{1 \textwidth}{!} { % Resize table
+        \begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+            \hline
+            N & INC & CFR & CEC Best & CEC Average & CEC Std. Deviation & CECR Best & CECR Average & CECR Std. Deviation \\ \hline
+            4 & 15 & 4 & 2 & 6,7 & 4,855 & 0 & 8,3 & 7,243 \\
+            6 & 149 & 76 & 3 & 30,1 & 17,527 & 3 & 54,6 & 52,570 \\
+            8 & 1965 & 14 & 11 & 37,2 & 24,521 & 6 & 29,5 &	29,334 \\
+            16 & NER & 77 & 9 & 194 & 172,059 & 23 & 467,3 & 672,706 \\ \hline
+    \end{tabular}
+    } % Close resize
+    \label{tab:nattackingpairs-expanded}
 \end{table}
 
-\begin{table}[]
-\caption{Path cost for the \textit{number of attacking pairs} heuristic function}
-\centering
-\begin{tabular}{llllll}
-Path cost &                      &                  &                       &                          &                                 \\ \hline
-N         & Incremental          & CompleteFirstRow & ComplEveryCol Best    & ComplEveryCol Average    & ComplEveryCol Std. Deviation    \\ \hline
-4         & 4                    & 3                & 2                     & 2,8                      & 0,632                           \\
-6         & 6                    & 6                & 3                     & 4,1                      & 0,738                           \\
-8         & 8                    & 8                & 4                     & 4,9                      & 0,876                           \\
-16        & Not enough resources & 17               & 7                     & 9                        & 1,333
-\end{tabular}
-\label{tab:nattackingpairs-pathcost}
+\begin{table}[H]
+    \caption{Path cost for the \textit{number of attacking pairs} heuristic function}
+    \centering
+    \resizebox{1 \textwidth}{!} { % Resize table
+        \begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+            \hline
+            N & INC & CFR & CEC Best & CEC Average & CEC Std. Deviation & CECR Best & CECR Average & CECR Std. Deviation \\ \hline
+            4 & 4 & 3 & 2 & 2,8 & 0,632 & 0 & 3,1 &	1,595 \\
+            6 & 6 & 6 & 3 & 4,1 & 0,738 & 2 & 3,8 & 1,135 \\
+            8 & 8 & 8 & 4 & 4,9 & 0,876 & 3	& 4,4 &	0,966 \\
+            16 & NER & 17 & 7 & 9 & 1,333 & 6 & 7,6 & 1,776 \\ \hline
+    \end{tabular}
+    } % Close resize
+    \label{tab:nattackingpairs-pathcost}
 \end{table}
 % Probabilistic estimation of solution
 \subsubsection{Probabilistic estimation of solution}
-For the \textit{probabilist estimation of solution} heuristic the results obtained are listed below in the form of two tables. \textbf{Table 5} shows the expanded nodes for every version as well as the best, average and standard deviation for the completed version with queens in every column. Note that for $n = 8$ the average and best case of the complete version with queens in every column are the same. This is because only one of ten executions was able to finish.  \textbf{Table 6} shows the same information but for the path cost of the solution.
+For the \textit{probabilist estimation of solution} heuristic the results obtained are listed below in the form of two tables. \ref{tab:probestimation-expanded} shows the expanded nodes for every version as well as the best, average and standard deviation for the completed version with queens in every column. Note that for $n = 8$ the average and best case of the complete version with queens in every column are the same. This is because only one of ten executions was able to finish.  \ref{tab:probestimation-pathcost} shows the same information but for the path cost of the solution.
 
-\begin{table}[]
-\caption{Expanded nodes for the \textit{probabilistic estimation of solution} heuristic function}
-\centering
-\begin{tabular}{llllll}
-Expanded &                      &                      &                      &                       &                              \\ \hline
-N        & Incremental          & CompleteFirstRow     & ComplEveryCol Best   & ComplEveryCol Average & ComplEveryCol Std. Deviation \\ \hline
-4        & 15                   & 70                   & 26                   & 84,2                  & 49,161                       \\
-6        & 149                  & 15259                & 576                  & 8464,5                & 7253,468                     \\
-8        & 1965                 & Not enough resources & 20081                & 20081                 & 0,000                        \\
-16       & Not enough resources & Not enough resources & Not enough resources & Not enough resources  & Not enough resources        
-\end{tabular}
-\label{tab:probestimation-expanded}
+\begin{table}[H]
+    \caption{Expanded nodes for the \textit{probabilistic estimation of solution} heuristic function}
+    \centering
+    \resizebox{1 \textwidth}{!} { % Resize table
+        \begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+            \hline
+            N & INC & CFR & CEC Best & CEC Average & CEC Std. Deviation & CECR Best & CECR Average & CECR Std. Deviation \\ \hline
+            4 & 15 & 70 & 26 & 84,2 & 49,161 & 0 & 51,4 & 57,975 \\
+            6 & 149 & 15259 & 576 & 8464,5 & 7253,468 & 249 & 6621,1 & 6357,683 \\
+            8 & 1965 & NER & 20081 & 20081 & 0,000 & 335 & 396,2 & 1291,440 \\
+            16 & NER & NER & NER & NER & NER & NER & NER & NER \\ \hline         
+    \end{tabular}
+    } % Close resize
+    \label{tab:probestimation-expanded}
 \end{table}
 
-\begin{table}[]
-\caption{Path cost for the \textit{probabilistic estimation of solution} heuristic function}
-\centering
-\label{tab:probestimation-pathcost}
-\begin{tabular}{llllll}
-Path cost &                      &                      &                      &                       &                              \\ \hline
-N         & Incremental          & CompleteFirstRow     & ComplEveryCol Best   & ComplEveryCol Average & ComplEveryCol Std. Deviation \\ \hline
-4         & 4                    & 3                    & 2                    & 2,5                   & 0,527                        \\
-6         & 6                    & 5                    & 3                    & 3,9                   & 0,738                        \\
-8         & 8                    & Not enough resources & 3                    & 3                     & 0,000                        \\
-16        & Not enough resources & Not enough resources & Not enough resources & Not enough resources  & Not enough resources        
-\end{tabular}
+\begin{table}[H]
+    \caption{Path cost for the \textit{probabilistic estimation of solution} heuristic function}
+    \centering
+    \label{tab:probestimation-pathcost}
+    \resizebox{1 \textwidth}{!} { % Resize table
+        \begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+            \hline
+            N & INC & CFR & CEC Best & CEC Average & CEC Std. Deviation & CECR Best & CECR Average & CECR Std. Deviation \\ \hline
+            4 & 4 & 3 & 2 & 2,5 & 0,527 & 0 & 2 & 1,247 \\
+            6 & 6 & 5 & 3 & 3,9 & 0,738 & 2 & 3,7 & 0,949 \\
+            8 & 8 & NER & 3 & 3 & 0,000 & 2 & 0,7 &	0,577 \\
+            16 & NER & NER & NER & NER  & NER & NER & NER  & NER \\ \hline        
+    \end{tabular}
+    } % Close resize
 \end{table}
 % Genetic algorithm results
 \subsection{GA Results}\label{gen_results}
-Now the data obtained from the executions of the genetic algorithm will be shown in the form of two tables. \textbf{Table 7} shows the parameter values for the genetic algorithm. \textbf{Table 8} shows the average and best fitness values, the standard deviation and the number of solutions for each ten executions of the problem.
+Now the data obtained from the executions of the genetic algorithm will be shown in the form of two tables. \ref{tab:ag-parameters} shows the parameter values for the genetic algorithm. \ref{tab:ag-data} shows the average and best fitness values, the standard deviation and the number of solutions for each ten executions of the problem.
 
-\begin{table}[]
-\centering
-\begin{tabular}{l|l}
-pop size      & 50   \\ \hline
-mutation prob & 0.15 \\ \hline
-n generations & 100 
-\end{tabular}
-\caption{Parameters of the genetic algorithm}
-\label{tab:ag-parameters}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|l}
+        pop size      & 50   \\ \hline
+        mutation prob & 0.15 \\ \hline
+        n generations & 100 
+    \end{tabular}
+    \caption{Parameters of the genetic algorithm}
+    \label{tab:ag-parameters}
 \end{table}
 
-\begin{table}[]
-\centering
-\begin{tabular}{lllll}
-N  & Best Fitness & Average Fitness & Std. Deviation & Valid Solutions      \\ \hline
-4  & 6            & 6               & 0              & 10                   \\
-6  & 15           & 15              & 0              & 10                   \\
-8  & 28           & 28              & 0              & 10                   \\
-16 & 120          & 119,5           & 0,527          & 5                    \\
-32 & 493          & 492,3           & 0,949          & 0
-\end{tabular}
-\caption{Data obtained for the genetic algorithm}
-\label{tab:ag-data}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+        N  & Best Fitness & Average Fitness & Std. Deviation & Valid Solutions      \\ \hline
+        4  & 6            & 6               & 0              & 10                   \\
+        6  & 15           & 15              & 0              & 10                   \\
+        8  & 28           & 28              & 0              & 10                   \\
+        16 & 120          & 119,5           & 0,527          & 5                    \\
+        32 & 493          & 492,3           & 0,949          & 0
+    \end{tabular}
+    \caption{Data obtained for the genetic algorithm}
+    \label{tab:ag-data}
 \end{table}
 % Comparison of A* and GA results
 \subsection{Comparison of A* and GA results}\label{comparison_astar_gen}
@@ -313,26 +334,26 @@ According to the data it can be said that the genetic algorithm was able to fini
 After performing both a theoretical and a experimental study of the problem and the algorithms, it can be concluded that there is no clear better solution for the N-queens problem. The A* algorithm always gives the optimal solution but requires big computational calculations whereas the genetic algorithm is more efficient but does not always give optimal solutions. With this conclusion the research is over.
 % Bibliography
 \begin{thebibliography}{8}
-\bibitem{inteligencia-artificial}
-J. Palma, R. Marín (Eds): Inteligencia Artificial. Técnicas, métodos y aplicaciones. McGraw Hill. 2008.
+    \bibitem{inteligencia-artificial}
+        J. Palma, R. Marín (Eds): Inteligencia Artificial. Técnicas, métodos y aplicaciones. McGraw Hill. 2008.
 
-\bibitem{artificial-intelligence-1}
-Stuart Russell, Peter Norvig: Artificial Intelligence: A Modern Approach. 3rd Ed. Pearson. 2010. Global Edition pp. 93-99.
+    \bibitem{artificial-intelligence-1}
+        Stuart Russell, Peter Norvig: Artificial Intelligence: A Modern Approach. 3rd Ed. Pearson. 2010. Global Edition pp. 93-99.
 
-\bibitem{artificial-intelligence-2}
-Stuart Russell, Peter Norvig: Artificial Intelligence: A Modern Approach. 3rd Ed. Pearson. 2010. Global Edition pp. 126-129.
+    \bibitem{artificial-intelligence-2}
+        Stuart Russell, Peter Norvig: Artificial Intelligence: A Modern Approach. 3rd Ed. Pearson. 2010. Global Edition pp. 126-129.
 
-\bibitem{essentials-metaheuristics}
-Sean Luke: Essentials of Metaheuristics. 2nd Ed. Lulu. 2013. pp. 36-45. Available at \url{http://cs.gmu.edu/~sean/book/metaheuristics/}.
+    \bibitem{essentials-metaheuristics}
+        Sean Luke: Essentials of Metaheuristics. 2nd Ed. Lulu. 2013. pp. 36-45. Available at \url{http://cs.gmu.edu/\textasciitilde sean/book/metaheuristics/}.
 
-\bibitem{ag-tutorial}
-MA. González, R. Varela: Tutorial on Genetic Algorithms. Computing department. University of Oviedo.
+    \bibitem{ag-tutorial}
+        MA. González, R. Varela: Tutorial on Genetic Algorithms. Computing department. University of Oviedo.
 
-\bibitem{darwin}
-C. Darwin: On the Origin of Species by Means of Natural Selection, or the Preservation of Favoured Races in the Struggle for Life. John Murray. 1859.
- 
-\bibitem{aimajava}
-Github's repository page for the \textit{aima-java} project, \url{https://github.com/aimacode/aima-java}. Last accesed 1 November 2020.
+    \bibitem{darwin}
+        C. Darwin: On the Origin of Species by Means of Natural Selection, or the Preservation of Favoured Races in the Struggle for Life. John Murray. 1859.
+
+    \bibitem{aimajava}
+        Github's repository page for the \textit{aima-java} project, \url{https://github.com/aimacode/aima-java}. Last accesed 7 November 2021.
 \end{thebibliography}
 \end{document}
 
