@@ -11,6 +11,7 @@
 \usepackage{lastpage}
 \usepackage{array}
 \usepackage{float}
+\usepackage[colorlinks=true,urlcolor=black,linkcolor=black,citecolor=black]{hyperref}
 
 % Document
 \begin{document}
@@ -46,7 +47,7 @@ Some traditional forms of solving the problem include:
 \end{itemize}
 % A* algorithm
 \section{A* algorithm}\label{astar_alg}
-The A* algorithm \cite{inteligencia-artificial,artificial-intelligence-1} is an informed search algorithm. Its also an specialization of the BF (Best First) algorithm with a different evaluation function. 
+The A* algorithm \cite{inteligencia-artificial,artificial-intelligence-1} is an informed search algorithm. It is also an specialization of the BF (Best First) algorithm with a different evaluation function. 
 
 This algorithm evaluates nodes by adding $g(n)$, which is the best cost at that moment for going from the initial node to $n$, and $h(n)$, the estimated cost of reaching the goal from $n$.
 
@@ -87,7 +88,7 @@ A genetic algorithm has the following components:
 \section{Application of A* algorithm to the N-queens problem}\label{astar_nqueens}
 Two ways of modeling the search space have been defined for this problem:
 \begin{itemize}
-    \item \textbf{Incremental:} in this version, the initial state is the empty gameboard and in each iteration a new queen is placed in a position such as it is not attacking or being attacked by any other queen in the board. This keeps going until the N queens are placed or until there are no locations in the board where the queen can be placed without breaking the constraints.
+    \item \textbf{Incremental:} in this version, the initial state is the empty gameboard and in each iteration a new queen is placed in a position such that it is not attacking or being attacked by any other queen in the board. This keeps going until the N queens are placed or until there are no locations in the board where the queen can be placed without breaking the constraints.
     \item \textbf{Complete:} in this version, the initial state is a board where the N queens are already placed. However, the queens can be in locations where they are attacking one another. In each iteration a queen is moved to a different position until a state where no pair of queens are attacking themselves is reached. There are three variants:
         \begin{itemize}
             \item \textbf{Queens in first row:} in this variant the n queens are placed in the first row of the board.
@@ -314,11 +315,11 @@ Once both algorithms have been tested, an analysis of the data will be performed
 
 % A* results
 \paragraph{A*} 
-In the case of A* a study on the best \textbf{space of search} and \textbf{heuristic function} was carried out. Of the fourth search spaces present in this paper, these being all versions of the complete space of search and the incremental space of search, a better performance overall is observed in the case of the complete version with the $n$ queens in \textbf{every column and row} of the board. In the case of heuristic functions, the one with the greatest results is the \textbf{number of attacking pairs} heuristic function.
+In the case of A*, a study on the best \textbf{space of search} and \textbf{heuristic function} was carried out. Of the fourth search spaces present in this paper, these being all versions of the complete space of search and the incremental space of search, a better performance overall is observed in the case of the complete version with the $n$ queens in \textbf{every column and row} of the board. In the case of heuristic functions, the one with the greatest results is the \textbf{number of attacking pairs} heuristic function.
 
 % AG results
 \paragraph{GA}
-In the case of the genetic algorithm a study focusing on the results given some fixed parameters was conducted. The algorithm finished the execution in every instance of $n$. However, as the value of $n$ increased the number of found valid solutions started to drop in a quick manner, not being able to find a soluton for $n = 32$. 
+In the case of the genetic algorithm, a study focusing on the results given some fixed parameters was conducted. The algorithm finished the execution in every instance of $n$. However, as the value of $n$ increased the number of found valid solutions started to drop in a quick manner, not being able to find a soluton for $n = 32$. Changing the parameters resulted in much better results for $n = 16$, but still not good enough for $n = 32$.  
 
 % Comparison
 \paragraph{Comparison}
@@ -348,7 +349,7 @@ After performing both a theoretical and a experimental study of the problem and 
         C. Darwin: On the Origin of Species by Means of Natural Selection, or the Preservation of Favoured Races in the Struggle for Life. John Murray. 1859.
 
     \bibitem{aimajava}
-        Github's repository page for the \textit{aima-java} project, \url{https://github.com/aimacode/aima-java}. Last accesed 7 November 2021.
+        Github's repository page for the \textit{aima-java} project, \url{https://github.com/aimacode/aima-java}. Last accessed on 7 November 2021.
 \end{thebibliography}
 \end{document}
 
