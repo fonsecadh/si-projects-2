@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProbModelXML formatVersion="0.2.0">
+  <ProbNet type="BayesianNetwork">
+    <Comment showWhenOpeningNetwork="false"><![CDATA[<html>
+  <head>
+    
+  </head>
+  <body>
+    UO258318 - Sistemas Inteligentes: Red Bayesiana
+  </body>
+</html>]]></Comment>
+    <DecisionCriteria>
+      <Criterion name="---" unit="---" />
+    </DecisionCriteria>
+    <Properties />
+    <Variables>
+      <Variable name="Boxes" type="finiteStates" role="chance">
+        <Coordinates x="568" y="448" />
+        <States>
+          <State name="No entrar" />
+          <State name="Entrar" />
+        </States>
+      </Variable>
+      <Variable name="Pinchazo" type="finiteStates" role="chance">
+        <Coordinates x="172" y="330" />
+        <States>
+          <State name="No" />
+          <State name="Sí" />
+        </States>
+      </Variable>
+      <Variable name="Ruedas" type="finiteStates" role="chance">
+        <Coordinates x="124" y="166" />
+        <States>
+          <State name="Desgastadas" />
+          <State name="Nuevas" />
+        </States>
+      </Variable>
+      <Variable name="¿Undercut del rival?" type="finiteStates" role="chance">
+        <Coordinates x="842" y="131" />
+        <States>
+          <State name="No" />
+          <State name="Sí" />
+        </States>
+      </Variable>
+      <Variable name="Coche de seguridad" type="finiteStates" role="chance">
+        <Coordinates x="423" y="254" />
+        <States>
+          <State name="Sí" />
+          <State name="No" />
+        </States>
+      </Variable>
+      <Variable name="Escombros en pista" type="finiteStates" role="chance">
+        <Coordinates x="262" y="97" />
+        <States>
+          <State name="No" />
+          <State name="Sí" />
+        </States>
+      </Variable>
+      <Variable name="Condición pista" type="finiteStates" role="chance">
+        <Coordinates x="1114" y="269" />
+        <States>
+          <State name="Seca" />
+          <State name="Mojada" />
+          <State name="Muy mojada" />
+        </States>
+      </Variable>
+      <Variable name="¿Dos tipos neumáticos distintos?" type="finiteStates" role="chance">
+        <Coordinates x="558" y="192" />
+        <States>
+          <State name="No" />
+          <State name="Sí" />
+        </States>
+      </Variable>
+      <Variable name="Neumáticos actuales" type="finiteStates" role="chance">
+        <Coordinates x="888" y="282" />
+        <States>
+          <State name="Intermedios" />
+          <State name="Secos" />
+          <State name="Lluvia" />
+        </States>
+      </Variable>
+      <Variable name="¿Neumáticos correctos?" type="finiteStates" role="chance">
+        <Coordinates x="996" y="398" />
+        <States>
+          <State name="No" />
+          <State name="Sí" />
+        </States>
+      </Variable>
+    </Variables>
+    <Links>
+      <Link directed="true">
+        <Variable name="Pinchazo" />
+        <Variable name="Boxes" />
+      </Link>
+      <Link directed="true">
+        <Variable name="Ruedas" />
+        <Variable name="Pinchazo" />
+      </Link>
+      <Link directed="true">
+        <Variable name="Ruedas" />
+        <Variable name="Boxes" />
+      </Link>
+      <Link directed="true">
+        <Variable name="¿Undercut del rival?" />
+        <Variable name="Boxes" />
+      </Link>
+      <Link directed="true">
+        <Variable name="Coche de seguridad" />
+        <Variable name="Boxes" />
+      </Link>
+      <Link directed="true">
+        <Variable name="Escombros en pista" />
+        <Variable name="Coche de seguridad" />
+      </Link>
+      <Link directed="true">
+        <Variable name="Escombros en pista" />
+        <Variable name="Pinchazo" />
+      </Link>
+      <Link directed="true">
+        <Variable name="Condición pista" />
+        <Variable name="¿Neumáticos correctos?" />
+      </Link>
+      <Link directed="true">
+        <Variable name="¿Dos tipos neumáticos distintos?" />
+        <Variable name="Boxes" />
+      </Link>
+      <Link directed="true">
+        <Variable name="Neumáticos actuales" />
+        <Variable name="¿Neumáticos correctos?" />
+      </Link>
+      <Link directed="true">
+        <Variable name="¿Neumáticos correctos?" />
+        <Variable name="Boxes" />
+      </Link>
+    </Links>
+    <Potentials>
+      <Potential type="Table" role="conditionalProbability">
+        <Variables>
+          <Variable name="Boxes" />
+          <Variable name="Coche de seguridad" />
+          <Variable name="Pinchazo" />
+          <Variable name="¿Neumáticos correctos?" />
+          <Variable name="¿Dos tipos neumáticos distintos?" />
+          <Variable name="¿Undercut del rival?" />
+          <Variable name="Ruedas" />
+        </Variables>
+        <Values>0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.1 0.9 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.2 0.8 0.3 0.7 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.2 0.8 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.1 0.9 0.5 0.5 0.0 1.0 0.0 1.0 0.1 0.9 0.3 0.7 0.0 1.0 0.0 1.0 0.8 0.2 0.9 0.1 0.0 1.0 0.0 1.0 0.2 0.8 0.4 0.6 0.0 1.0 0.0 1.0 0.9 0.1 0.7 0.3 0.0 1.0 0.0 1.0 0.0 1.0 0.4 0.6 0.0 1.0 0.0 1.0 0.2 0.8 0.8 0.2 0.0 1.0 0.0 1.0 0.0 1.0 0.4 0.6 0.0 1.0 0.0 1.0 0.8 0.2 0.7 0.3 0.0 1.0 0.0 1.0</Values>
+      </Potential>
+      <Potential type="Table" role="conditionalProbability">
+        <Variables>
+          <Variable name="Pinchazo" />
+          <Variable name="Ruedas" />
+          <Variable name="Escombros en pista" />
+        </Variables>
+        <Values>0.4 0.6 0.9 0.1 0.3 0.7 0.8 0.2</Values>
+      </Potential>
+      <Potential type="Table" role="conditionalProbability">
+        <Variables>
+          <Variable name="Ruedas" />
+        </Variables>
+        <Values>0.35 0.65</Values>
+      </Potential>
+      <Potential type="Table" role="conditionalProbability">
+        <Variables>
+          <Variable name="¿Undercut del rival?" />
+        </Variables>
+        <Values>0.8 0.2</Values>
+      </Potential>
+      <Potential type="Uniform" role="conditionalProbability">
+        <Variables>
+          <Variable name="Coche de seguridad" />
+          <Variable name="Escombros en pista" />
+        </Variables>
+      </Potential>
+      <Potential type="Table" role="conditionalProbability">
+        <Variables>
+          <Variable name="Escombros en pista" />
+        </Variables>
+        <Values>0.825 0.175</Values>
+      </Potential>
+      <Potential type="Table" role="conditionalProbability">
+        <Variables>
+          <Variable name="Condición pista" />
+        </Variables>
+        <Values>0.75 0.15 0.1</Values>
+      </Potential>
+      <Potential type="Table" role="conditionalProbability">
+        <Variables>
+          <Variable name="¿Dos tipos neumáticos distintos?" />
+        </Variables>
+        <Values>0.3 0.7</Values>
+      </Potential>
+      <Potential type="Table" role="conditionalProbability">
+        <Variables>
+          <Variable name="Neumáticos actuales" />
+        </Variables>
+        <Values>0.15 0.75 0.1</Values>
+      </Potential>
+      <Potential type="Table" role="conditionalProbability">
+        <Variables>
+          <Variable name="¿Neumáticos correctos?" />
+          <Variable name="Neumáticos actuales" />
+          <Variable name="Condición pista" />
+        </Variables>
+        <Values>1.0 0.0 0.0 1.0 1.0 0.0 0.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0</Values>
+      </Potential>
+    </Potentials>
+  </ProbNet>
+  <InferenceOptions>
+    <MulticriteriaOptions>
+      <SelectedAnalysisType>UNICRITERION</SelectedAnalysisType>
+      <Unicriterion>
+        <Scales>
+          <Scale Criterion="---" Value="1.0" />
+        </Scales>
+      </Unicriterion>
+      <CostEffectiveness>
+        <Scales>
+          <Scale Criterion="---" Value="1.0" />
+        </Scales>
+        <CE_Criteria>
+          <CE_Criterion Criterion="---" Value="Cost" />
+        </CE_Criteria>
+      </CostEffectiveness>
+    </MulticriteriaOptions>
+  </InferenceOptions>
+</ProbModelXML>
