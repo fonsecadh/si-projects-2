@@ -22,7 +22,7 @@
 \section{Descripción de la red bayesiana}
 La red bayesiana implementada modela la estrategia de parada en boxes de una carrera de la Fórmula 1.
 
-Para ganar en la Fórmula 1 es imperativo el tener una buena estrategia de carrera, además de un buen coche o buenos pilotos. Para ello, los equipos trabajan con una gran cantidad de datos que ayudan a formular una estrategia de carrera adecuada a cada circuito. En este ejemplo se ha modelado de forma muy simplificada diez factores que pueden influir en la decisión del ingeniero de carrera de ordenar al piloto la entrada a boxes.
+Para ganar en la Fórmula 1 es imperativo el tener una buena estrategia de carrera, además de un buen coche o buenos pilotos. Para ello, los equipos trabajan con una gran cantidad de datos que ayudan a formular sus estrategias, adecuándolas a cada circuito. En este ejemplo se ha modelado de forma muy simplificada diez factores que pueden influir en la decisión del ingeniero de carrera de ordenar al piloto la entrada a boxes.
 
 Los diez nodos que se han modelado son los siguientes:
 \begin{itemize}
@@ -30,7 +30,7 @@ Los diez nodos que se han modelado son los siguientes:
     \item \textbf{Pinchazo:} Si la rueda ha sufrido un pinchazo.
     \item \textbf{Ruedas:} Si las ruedas son nuevas o desgastadas.
     \item \textbf{¿Undercut del rival?:} Si el piloto rival ha parado en boxes antes que el piloto del ingeniero de carrera, con la intención de adelantarle cuando sea éste el que entre en boxes.
-    \item \textbf{Coche de seguridad:} Si el coche de seguridad ha salido a pista. Cuando el coche de seguridad está en pista se suele perder menos tiempo con respecto al resto de pilotos.
+    \item \textbf{Coche de seguridad:} Si el coche de seguridad ha salido a pista. Cuando el coche de seguridad está en pista se suele perder menos tiempo con respecto al resto de pilotos si se realiza una parada.
     \item \textbf{Escombros en la pista:} Si hay material peligroso en pista.
     \item \textbf{Condición pista:} Si la pista está seca, mojada o muy mojada.
     \item \textbf{¿Dos tipos neumáticos distintos?:} Si al menos se ha corrido con dos tipos de neumáticos con distinto compuesto. Es una regla de la Fórmula 1 el que los pilotos corran con al menos dos tipos de neumático seco en una carrera.
@@ -58,6 +58,6 @@ Mediante el criterio de d-separación, se obtiene que las variables \textit{Esco
 \subsubsection{\textit{Neumáticos actuales} y \textit{Condición pista}}
 Mediante el criterio de d-separación, se da que las variables \textit{Neumáticos actuales} y \textit{Condición pista} son independientes sin condición ya que existe una tripleta común, por lo que si no se conocen ni su hija \textit{¿Neumáticos correctos?} ni los descendientes de ésta el camino entre ambas variables está bloqueado.
 \section{Probabilidades del modelo}
-Las probabilidades del modelo se han estimado en base a la experiencia propia del autor viéndo carreras de Fórmula 1 a lo largo de los años. Por supuesto no son exactas pero se intentan asemejar lo máximo posible a la realidad de las carreras.
+Las probabilidades del modelo se han estimado en base a la experiencia propia del autor viendo carreras de Fórmula 1 a lo largo de los años. Por supuesto no son exactas pero se intentan asemejar lo máximo posible a la realidad de las carreras.
 \end{document}
 
