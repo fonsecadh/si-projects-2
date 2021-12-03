@@ -1,0 +1,63 @@
+\documentclass[]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{fancyhdr}
+\usepackage{csquotes}
+\usepackage{lastpage}
+\usepackage{array}
+\usepackage{float}
+\usepackage[colorlinks=true,urlcolor=black,linkcolor=black,citecolor=black]{hyperref}
+
+% Document
+\begin{document}
+% Title
+\title{Sistemas Inteligentes. Práctica obligatoria de Redes Bayesianas.}
+\author{Hugo Fonseca Díaz\\ \href{mailto:uo258318@uniovi.es}{uo258318@uniovi.es}}
+\maketitle
+\section{Descripción de la red bayesiana}
+La red bayesiana implementada modela la estrategia de parada en boxes de una carrera de la Fórmula 1.
+
+Para ganar en la Fórmula 1 es imperativo el tener una buena estrategia de carrera, además de un buen coche o buenos pilotos. Para ello, los equipos trabajan con una gran cantidad de datos que ayudan a formular una estrategia de carrera adecuada a cada circuito. En este ejemplo se ha modelado de forma muy simplificada diez factores que pueden influir en la decisión del ingeniero de carrera de ordenar al piloto la entrada a boxes.
+
+Los diez nodos que se han modelado son los siguientes:
+\begin{itemize}
+    \item \textbf{Boxes:} Indicador de entrada en boxes.
+    \item \textbf{Pinchazo:} Si la rueda ha sufrido un pinchazo.
+    \item \textbf{Ruedas:} Si las ruedas son nuevas o desgastadas.
+    \item \textbf{¿Undercut del rival?:} Si el piloto rival ha parado en boxes antes que el piloto del ingeniero de carrera, con la intención de adelantarle cuando sea éste el que entre en boxes.
+    \item \textbf{Coche de seguridad:} Si el coche de seguridad ha salido a pista. Cuando el coche de seguridad está en pista se suele perder menos tiempo con respecto al resto de pilotos.
+    \item \textbf{Escombros en la pista:} Si hay material peligroso en pista.
+    \item \textbf{Condición pista:} Si la pista está seca, mojada o muy mojada.
+    \item \textbf{¿Dos tipos neumáticos distintos?:} Si al menos se ha corrido con dos tipos de neumáticos con distinto compuesto. Es una regla de la Fórmula 1 el que los pilotos corran con al menos dos tipos de neumático seco en una carrera.
+    \item \textbf{Neumáticos actuales:} Indica el tipo de neumático actual. Pueden ser secos, intermedios o de lluvia.
+    \item \textbf{¿Neumáticos correctos?:} Indica si el tipo de neumático concuerda con la condición de la pista.
+\end{itemize}
+\section{Justificación del modelo}
+La temática de Fórmula 1 aporta varias situaciones modelables mediante redes bayesianas. Se ha escogido la estrategia de parada en boxes ya que puede cambiar según se van descubriendo evidencias a lo largo de la carrera, lo que la hace idónea. Además, es sencilla de comprender aunque no se conozca el deporte (o eso se ha intentado).
+
+Con respecto a la originalidad, se desconoce si las redes bayesianas son realmente utilizadas por los equipos de F1. Es probable que usen algún tipo de sistema inteligente para preparar y resolver las carreras, aunque aquí se ha modelado una red muy simplificada en base a la experiencia del autor viendo carreras de Fórmula 1. Por tanto se considera que la red es suficientemente original, si no en temática al menos en contenido.
+\section{Independencias}
+Se describen a continuación las tres independencias solicitadas, dos condicionales y otra sin condición.
+\subsection{Independencias condicionales}
+\subsubsection{\textit{Coche de seguridad} y \textit{Pinchazo}}
+Mediante el criterio de d-separación, se sabe que las variables \textit{Coche de seguridad} y \textit{Pinchazo} son condicionalmente independientes si se conoce su nodo padre \textit{Escombros en pista}, ya que se bloquea el camino entre ambas.
+\subsubsection{\textit{Escombros en pista} y \textit{Boxes}}
+Mediante el criterio de d-separación, se obtiene que las variables \textit{Escombros en pista} (E, para luego aclararse mejor en la explicación) y \textit{Boxes} (B) son condicionalmente independientes si se conocen tanto \textit{Pinchazo} (P), \textit{Coche de seguridad} (C) y \textit{Ruedas} (R). Esto se debe a que se deben cortar tres caminos:
+
+\begin{itemize}
+    \item \textbf{De E a B pasando por C.} Se corta al conocer C.
+    \item \textbf{De E a B pasando por P}. Se corta al conocer P.
+    \item \textbf{De E a B pasando por R primero y luego P}. Como conocemos P, R y E son dependientes, por lo que se debe conocer R para cortar el camino entre E y B.
+\end{itemize}
+\subsection{Independencias no condicionales}
+\subsubsection{\textit{Neumáticos actuales} y \textit{Condición pista}}
+Mediante el criterio de d-separación, se da que las variables \textit{Neumáticos actuales} y \textit{Condición pista} son independientes sin condición ya que existe una tripleta común, por lo que si no se conocen ni su hija \textit{¿Neumáticos correctos?} ni los descendientes de ésta el camino entre ambas variables está bloqueado.
+\section{Probabilidades del modelo}
+Las probabilidades del modelo se han estimado en base a la experiencia propia del autor viéndo carreras de Fórmula 1 a lo largo de los años. Por supuesto no son exactas pero se intentan asemejar lo máximo posible a la realidad de las carreras.
+\end{document}
+
